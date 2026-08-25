@@ -1,14 +1,82 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0c0833" />
-    <meta name="description" content="Bone Cancer Prediction System — machine-learning web application interface demo." />
-    <title>Bone Cancer Prediction System</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Interactive Bone Cancer Prediction research interface for X-ray image workflows.">
+  <title>BoneScan AI — X-ray Research Interface</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="progress" id="progress"></div>
+
+  <header class="site-header">
+    <a class="logo" href="#home" aria-label="BoneScan AI home"><span class="logo-mark">✦</span><span>BONESCAN <em>AI</em><small>RESEARCH INTERFACE</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    <nav id="nav"><a href="#home">Home</a><a href="#models">Models</a><a href="#workflow">Workflow</a><a href="#predict">Predict</a><a href="#about">About</a><button class="nav-cta" data-scroll="#predict">Start analysis <span>↗</span></button></nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-grid"></div><div class="orb orb-a"></div><div class="orb orb-b"></div>
+      <div class="hero-copy reveal">
+        <div class="kicker"><span class="pulse"></span> AI-ASSISTED X-RAY RESEARCH</div>
+        <h1>Turn an X-ray into a <span>clearer workflow.</span></h1>
+        <p>Upload an image, choose a validated model endpoint, and inspect the response in a focused research interface built for the Bone Cancer Prediction project.</p>
+        <div class="hero-actions"><button class="btn primary" data-scroll="#predict">Upload X-ray <span>→</span></button><button class="btn ghost" data-scroll="#models">Explore models</button></div>
+        <div class="trust-row"><span>4 models</span><i></i><span>Flask-ready API</span><i></i><span>Responsive UI</span></div>
+      </div>
+      <div class="hero-card reveal delay-1">
+        <div class="card-top"><span>LIVE WORKSPACE</span><span class="status"><b></b> READY</span></div>
+        <div class="scan-visual"><div class="scan-grid"></div><div class="fake-bone"><span></span></div><div class="scan-beam"></div><div class="scan-corner tl"></div><div class="scan-corner tr"></div><div class="scan-corner bl"></div><div class="scan-corner br"></div><div class="scan-tag">X-RAY / SAMPLE VIEW</div></div>
+        <div class="hero-metrics"><div><small>SELECTED MODEL</small><strong id="heroModel">CNN</strong></div><div><small>ACCURACY*</small><strong>96.45%</strong></div><div><small>API</small><strong class="api-state" id="heroApi">NOT SET</strong></div></div>
+      </div>
+    </section>
+
+    <section class="stats reveal"><div><strong>96.45%</strong><span>Reference CNN accuracy*</span></div><div><strong>4</strong><span>Models in benchmark</span></div><div><strong>01</strong><span>Image → inference flow</span></div><div><strong>24/7</strong><span>Static web access</span></div></section>
+
+    <section class="section" id="models">
+      <div class="section-head reveal"><div><span class="section-no">01 / BENCHMARK</span><h2>Compare the <span>models.</span></h2></div><p>Reference metrics from the supplied project specification. Replace these with your verified held-out test results before clinical or academic claims.</p></div>
+      <div class="model-grid">
+        <article class="model-card active reveal"><span class="badge">BEST REFERENCE</span><div class="model-icon">◈</div><h3>CNN</h3><p>Convolutional Neural Network</p><strong>96.45%</strong><small>accuracy</small><button class="text-btn choose-model" data-model="cnn">Use CNN →</button></article>
+        <article class="model-card reveal delay-1"><div class="model-icon">⌁</div><h3>SVM</h3><p>Support Vector Machine</p><strong>86.21%</strong><small>accuracy</small><button class="text-btn choose-model" data-model="svm">Use SVM →</button></article>
+        <article class="model-card reveal delay-2"><div class="model-icon">╱</div><h3>Logistic Regression</h3><p>Linear classifier</p><strong>82.37%</strong><small>accuracy</small><button class="text-btn choose-model" data-model="logistic">Use Logistic →</button></article>
+        <article class="model-card reveal delay-3"><div class="model-icon">⌘</div><h3>Random Forest</h3><p>Tree ensemble</p><strong>84.18%</strong><small>accuracy</small><button class="text-btn choose-model" data-model="forest">Use Forest →</button></article>
+      </div>
+    </section>
+
+    <section class="section workflow-section" id="workflow">
+      <div class="section-head reveal"><div><span class="section-no">02 / WORKFLOW</span><h2>From image to <span>response.</span></h2></div><p>A simple front-end experience around the existing backend architecture. Every step is visible so users know what the system is doing.</p></div>
+      <div class="timeline"><div class="timeline-line"></div><article class="step reveal"><b>01</b><span class="step-icon">↑</span><h3>Upload</h3><p>Choose a JPG or PNG X-ray.</p></article><article class="step reveal delay-1"><b>02</b><span class="step-icon">◎</span><h3>Inspect</h3><p>Preview the selected image.</p></article><article class="step reveal delay-2"><b>03</b><span class="step-icon">◇</span><h3>Infer</h3><p>Send it to your Flask endpoint.</p></article><article class="step reveal delay-3"><b>04</b><span class="step-icon">✓</span><h3>Review</h3><p>Read the backend response.</p></article></div>
+    </section>
+
+    <section class="section predictor-section" id="predict">
+      <div class="section-head reveal"><div><span class="section-no">03 / ANALYSIS</span><h2>Run a <span>research analysis.</span></h2></div><p>The page works without a backend as a polished upload/preview experience. Connect the Flask API in Settings to enable real inference.</p></div>
+      <div class="workspace reveal">
+        <div class="workspace-left">
+          <div class="workspace-toolbar"><div><span class="live-dot"></span> ANALYSIS CONSOLE</div><button id="settingsBtn" class="icon-btn" title="API settings">⚙ Settings</button></div>
+          <div class="dropzone" id="dropzone"><input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg"><div class="empty-state" id="emptyState"><div class="upload-icon">↑</div><h3>Drop X-ray here</h3><p>or click to browse · JPG, JPEG, PNG</p><button class="btn small primary" id="browseBtn">Choose image</button></div><img id="preview" alt="Selected X-ray preview"><div class="scan-overlay" id="scanOverlay"><span>ANALYZING IMAGE</span><i></i></div></div>
+          <div class="controls"><label><span>MODEL</span><select id="modelSelect"><option value="cnn">CNN — Convolutional Neural Network</option><option value="svm">SVM — Support Vector Machine</option><option value="logistic">Logistic Regression</option><option value="forest">Random Forest</option></select></label><button class="btn primary analyze" id="analyzeBtn" disabled>Analyze X-ray <span>→</span></button><button class="btn ghost" id="clearBtn">Clear</button></div>
+          <div class="console-note" id="consoleNote">No image selected. Upload an X-ray to begin.</div>
+        </div>
+        <aside class="result-panel" id="resultPanel"><div class="result-label"><span>RESULT</span><b id="resultState">WAITING</b></div><div class="result-empty" id="resultEmpty"><div class="result-ring">◎</div><h3>Awaiting analysis</h3><p>Your verified backend response will appear here.</p></div><div class="result-content" id="resultContent" hidden><div class="result-icon" id="resultIcon">✓</div><span class="result-kicker" id="resultKicker">BACKEND RESPONSE</span><h3 id="resultLabel">Prediction returned</h3><div class="confidence"><strong id="confidenceValue">—</strong><span>reported confidence</span></div><div class="result-meta"><span>Model</span><b id="resultModel">CNN</b></div><p id="resultMessage"></p></div></aside>
+      </div>
+    </section>
+
+    <section class="section architecture"><div class="section-head reveal"><div><span class="section-no">04 / ARCHITECTURE</span><h2>Clean boundaries. <span>Better debugging.</span></h2></div><p>The static frontend lives on GitHub Pages; the Python/Flask inference service can live separately and be connected by HTTPS.</p></div><div class="arch-grid"><div class="arch-box reveal"><small>01 / FRONTEND</small><div>HTML</div><div>CSS</div><div>JavaScript</div><span>↘</span></div><div class="arch-box reveal delay-1"><small>02 / API</small><div>Flask</div><div>POST /predict</div><div>multipart/form-data</div><span>↘</span></div><div class="arch-box reveal delay-2"><small>03 / MODEL</small><div>CNN</div><div>SVM / LR / Forest</div><div>Validated artifact</div></div></div></section>
+
+    <section class="section about" id="about"><div class="about-card reveal"><div><span class="section-no">05 / RESPONSIBLE USE</span><h2>Designed to be <span>useful, not misleading.</span></h2><p>This interface never invents a cancer result. If no inference API is configured, it clearly tells the user why analysis cannot run. A real clinical workflow requires validated data, model evaluation, calibration, external validation and appropriate professional oversight.</p></div><div class="safety-points"><div>✓ No fabricated predictions</div><div>✓ Backend response displayed verbatim</div><div>✓ API endpoint configurable</div><div>✓ Mobile + desktop responsive</div></div></div></section>
+  </main>
+
+  <footer><div class="logo"><span class="logo-mark">✦</span><span>BONESCAN <em>AI</em><small>RESEARCH INTERFACE</small></span></div><p>Bone Cancer Prediction System · GitHub Pages frontend</p><small>* Reference metrics supplied with the project specification; not independently verified.</small></footer>
+
+  <dialog id="settingsDialog"><form method="dialog" class="settings-card"><button class="close" value="cancel" aria-label="Close">×</button><span class="section-no">CONNECTION</span><h2>Backend <span>settings.</span></h2><p>Enter the base URL of your deployed Flask API. Example: <code>https://your-api.example.com</code></p><label>API base URL<input id="apiInput" type="url" placeholder="https://your-flask-api.example.com"></label><div class="settings-actions"><button class="btn ghost" value="cancel">Cancel</button><button class="btn primary" id="saveApi" value="default">Save connection</button></div><div class="settings-status" id="settingsStatus"></div></form></dialog>
+  <div class="toast" id="toast"></div>
+  <script src="./script.js"></script>
+</body>
 </html>
