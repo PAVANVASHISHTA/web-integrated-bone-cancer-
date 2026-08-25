@@ -156,6 +156,7 @@ bone-cancer-prediction-platform/
 ├── backend/
 │   ├── app.py
 │   ├── requirements.txt
+│   ├── .env.example
 │   ├── README.md
 │   └── model/
 │       └── README.md
@@ -169,3 +170,5 @@ bone-cancer-prediction-platform/
 ├── README.md
 └── vite.config.js
 ```
+
+Deployment note: GitHub Pages publishes the frontend only; the Flask/NVIDIA service must be deployed separately and connected through `VITE_API_BASE`.
